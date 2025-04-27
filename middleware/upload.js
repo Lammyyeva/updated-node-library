@@ -4,7 +4,6 @@ const fs = require("fs");
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        //const uploadsDir = path.join(__dirname, "uploads");
         const uploadsDir = ("/uploads");
 
         const fileDir = file.fieldname === "image" ? "/images" : file.fieldname === "book" ? "/books" : file.fieldname === "audio" ? "/audioa" : null;
@@ -12,29 +11,12 @@ const storage = multer.diskStorage({
         if (!fileDir) {
              cb(new Error("invalid fieldname"));
         } 
-        //const dest = path.join(uploadsDir, fileDir);
         const dest = uploadsDir + fileDir;
 
         fs.mkdirSync(uploadsDir, { recursive: true });
         fs.mkdirSync(dest, { recursive: true });
         cb(null, dest);
 
-
-        // let dest = "/uploads";
-        // if (file.fieldname === 'image') {
-        //     dest += "/images";
-        //     cb(null, dest)
-        // } else if (file.fieldname === 'audio') {
-        //     dest += "/audios";
-        //     cb(null, dest)
-        // } else if (file.fieldname === 'book') {
-        //     dest += '/books'
-        //     cb(null, dest)
-        // }
-        // else {
-        //     cb(new Error("invalid fieldName"))
-        // }
-        
     },
     filename: (req, file, cb) => {
         const filename = file.fieldname + Date.now() + path.extname(file.originalname);
