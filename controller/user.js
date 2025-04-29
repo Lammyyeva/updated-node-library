@@ -24,12 +24,9 @@ const getBooksByCategory = async (req, res) => {
                     }
                 }
             });
-            console.log("hellooooooo", selectBook);
             
             if (selectBook.length === 0) return res.status(400).json({ error: "there are no books related to wanted category or genre" });
-            
-            console.log("helloooo",selectBook);
-            
+                        
             
             return res.status(200).json({ books: selectBook, currentPage: page });
         };

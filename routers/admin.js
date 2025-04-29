@@ -4,9 +4,8 @@ const upload = require("../middleware/upload");
 const { addBook, updateBook, deleteBook, addCategory, getCategories, addBookAndGenre,
     addGenre, getGenres,
     addPlease} = require("../controller/admin");
-const please = require("../middleware/please");
 
-    router.post("/upload", please, addPlease)
+router.post("/upload", upload, addPlease)// change
 router.post("/", upload, addBook);
 router.put("/:id", upload, updateBook);
 router.delete("/:id", deleteBook);
